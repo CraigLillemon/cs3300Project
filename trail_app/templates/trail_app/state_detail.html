@@ -1,0 +1,25 @@
+{% extends 'trail_app/base_template.html' %}
+
+{% block content %}
+
+<h1 style = "text-align: center;"> Trails in {{state.state}}</h1>
+<p></p>
+<h2 style = "text-align: center;"> Create New Trail </h2>
+<p style = "text-align: center;"><a href = "{% url 'trail-form' state.id %}" class = "btn btn-primary" >New  </a> </p>
+    {% for trail in trails %}
+
+        <div class="container pt-1 my-5 border">
+            <p><img src = "{{ trail.image.url }}" width = 150>
+            <strong>{{ trail.name }}</strong> 
+            <a href = "{% url 'trail-detail' trail.id %}" class = "btn btn-primary" >View </a>
+            <p>{{trail.location}} {{trail.zip_code}}</p>
+            <p>Temperature is {{trail.temperature}} degrees</p>
+            <p>The weather for the next three days: {{trail.weather}}</p>
+            <a href ="{% url 'trail-delete' trail.id %}" class = "btn btn-danger">Delete</a>
+            <a href ="{% url 'trail-update' trail.id %}" class = "btn btn-warning">Update</a>
+
+        </div>
+
+    {% endfor %}
+   
+{% endblock %}

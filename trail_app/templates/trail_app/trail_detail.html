@@ -1,0 +1,31 @@
+{% extends "trail_app/base_template.html" %}
+
+
+<!-- Replace block content in base_template.html -->
+{% block content %}
+<head>
+<style>
+    p{
+        font-weight: bold;
+        color: #333399;
+    }
+</style>
+
+</head>
+<h1 style = "text-align: center;">Trail Detail</h1>
+
+<ul class ="list-group">
+    <h2 style = "text-align: center;"></h2>
+        <p style = "text-align: left"><img  src = "{{ trail.image.url }}" width = 300> {{trail.name}}</p>
+        <p>{{trail.location}} {{trail.zip_code}}</p>
+            <p>Description: {{trail.name}}</p>
+            <p>Temperature is {{trail.temperature}} degrees</p>
+            <p>The weather for the next three days: {{trail.weather}}</p>
+            <p>placeholder for weather map</p>
+            <p>place holder for other API information </p>
+            
+</ul>
+
+
+
+{% endblock %}
