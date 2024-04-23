@@ -23,7 +23,14 @@
             <p>The weather for the next three days: {{trail.weather}}</p>
             <p>placeholder for weather map</p>
             <p>place holder for other API information </p>
-            
+            {% for data in trail_data_list%}
+            {% if data %}
+            <!-- Your HTML code for displaying weather data -->
+            <p><strong>Today's Weather is: {{ data.temp }} Humidity: {{ data.humidity }}% {{ data.main }}, {{data.description}}
+            <img src="http://openweathermap.org/img/w/{{ data.icon }}.png"> Wind Speed: {{ data.speed }} mph</strong></p>
+            <p><img src="https://tile.openweathermap.org/map/precipitation_new/9/{{latitude}}/{{longitude}}.png?appid=ae5d1984ae12b5f2f131ae14d16e16c6">
+            {% endif %}
+            {%endfor%}
 </ul>
 
 

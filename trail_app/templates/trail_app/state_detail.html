@@ -2,24 +2,28 @@
 
 {% block content %}
 
-<h1 style = "text-align: center;"> Trails in {{state.state}}</h1>
+<h1 style="text-align: center;">Trails in {{ state.state }}</h1>
 <p></p>
-<h2 style = "text-align: center;"> Create New Trail </h2>
-<p style = "text-align: center;"><a href = "{% url 'trail-form' state.id %}" class = "btn btn-primary" >New  </a> </p>
-    {% for trail in trails %}
-
+<h2 style="text-align: center;">Create New Trail</h2>
+<p style="text-align: center;"><a href="{% url 'trail-form' state.id %}" class="btn btn-primary">New</a></p>
+{% for trail, data in zipped_data %}
+    {% if trail %}
+        <!-- Your HTML code for displaying trail information -->
         <div class="container pt-1 my-5 border">
-            <p><img src = "{{ trail.image.url }}" width = 150>
+            <p><img src="{{ trail.image.url }}" width="150">
             <strong>{{ trail.name }}</strong> 
-            <a href = "{% url 'trail-detail' trail.id %}" class = "btn btn-primary" >View </a>
-            <p>{{trail.location}} {{trail.zip_code}}</p>
-            <p>Temperature is {{trail.temperature}} degrees</p>
-            <p>The weather for the next three days: {{trail.weather}}</p>
-            <a href ="{% url 'trail-delete' trail.id %}" class = "btn btn-danger">Delete</a>
-            <a href ="{% url 'trail-update' trail.id %}" class = "btn btn-warning">Update</a>
-
+            <a href="{% url 'trail-detail' trail.id %}" class="btn btn-primary">View</a></p>
+            <p>{{ trail.location }} {{ trail.zip_code }}</p>
+            
+            {% if data %}
+            <!-- Your HTML code for displaying weather data -->
+            <p><strong>Today's Weather is: {{ data.temp }} Humidity: {{ data.humidity }}% {{ data.main }} 
+            <img src="http://openweathermap.org/img/w/{{ data.icon }}.png"> Wind Speed: {{ data.speed }} mph</strong></p>
+            {% endif %}
+            
+            <a href="{% url 'trail-delete' trail.id %}" class="btn btn-danger">Delete</a>
+            <a href="{% url 'trail-update' trail.id %}" class="btn btn-warning">Update</a>
         </div>
-
-    {% endfor %}
-   
+    {% endif %}
+{% endfor %}
 {% endblock %}

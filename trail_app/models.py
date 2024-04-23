@@ -1,6 +1,8 @@
 from django.db import models
 from django.urls import reverse, reverse_lazy
 from django.views import generic
+from django.contrib.auth.models import User
+
 class State(models.Model):
     state_names = (
     ("Alabama", "Alabama"),
@@ -109,3 +111,11 @@ class TrailDeleteView(generic.DeleteView):
     model = Trail
     success_url = reverse_lazy('state-list')  # Redirect to home after deletion
     template_name = 'trail_app/trail_confirm_delete.html'
+
+
+class ManagerAssessmentRecord(models.Model):
+    manager = models.ForeignKey(User, on_delete=models.CASCADE)
+    score = models.IntegerField()
+
+    def __str__(self):
+        return f"{self.manager.username}-Score:{self.score}"

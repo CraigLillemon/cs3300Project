@@ -8,7 +8,7 @@
   {% bootstrap_css %}
   {% bootstrap_javascript %}
   {% bootstrap_messages %}
-   <title>UCCS CS Students</title>
+   <title>Uccs trail_application</title>
    <meta charset="utf-8">
    <meta name="viewport" content="width=device-width, initial-scale=1">
    <title>Bootstrap demo</title>
@@ -22,23 +22,22 @@
 
      <!-- Navbar-->
      <nav class="navbar navbar-expand-lg bg-body-tertiary">
-       <img src="{% static 'images/cs3300Project.jpg' %}">
+       <img src="{% static 'images/cs3300Project.jpg' %}" >
        <div class="container-fluid">
          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
            <span class="navbar-toggler-icon"></span>
          </button>
          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-           <div class="navbar-nav">
-             <!--  {% url 'index' %}  is defined in url path to dynamically create url -->
-             <a class="nav-link active" aria-current="page" href="{% url 'index' %}">Home</a>
-             <a class="nav-link" href="{% url 'state-list' %}">States</a>
-             <a class="nav-link" href="#">Menu 3</a>
-             {% if user.is_authenticated %}
-               <a class="nav-link" href="{% url 'logout' %}?next={{ request.path }}">Logout {{user}}</a>
-             {% else %}
-               <a class="nav-link" href="{% url 'login' %}?next={{ request.path }}">Login</a>
-             {% endif %}
-           </div>
+          <div class="navbar-nav ms-auto">
+            <a class="nav-link active" aria-current="page" href="{% url 'index' %}">Home</a>
+            <a class="nav-link" href="{% url 'state-list' %}">States</a>
+            <a class="nav-link" href="#">Menu 3</a>
+            {% if user.is_authenticated %}
+                <a class="nav-link" href="{% url 'logout' %}?next={{ request.path }}">Logout {{ user }}</a>
+            {% else %}
+                <a class="nav-link" href="{% url 'login' %}?next={{ request.path }}">Login</a>
+            {% endif %}
+        </div>
          </div>
        </div>
      </nav>
