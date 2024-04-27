@@ -6,16 +6,20 @@
 
 <h1>Please click state you would like to see trails in</h1>
 
-<ul class ="list-group">
+<ul class="list-group">
     {% for state in states %}
-    
-        <li>
-            <a href = "{% url 'state-detail' state.id %}" >{{state.state}}</a>
-        </li>
-        
-    </li>
+        {% if user.is_authenticated %}
+            <li>
+                <a href="{% url 'user-state-detail' state.id %}">{{ state.state }}</a>
+            </li>
+        {% else %}
+            <li>
+                <a href="{% url 'state-detail' state.id %}">{{ state.state }}</a>
+            </li>
+        {% endif %}
     {% endfor %}
 </ul>
+
 
 
 

@@ -1,5 +1,6 @@
 {% extends 'trail_app/base_template.html' %}
 {% block content %}
+
 <head>
     <style>
         .form-table {
@@ -85,7 +86,8 @@
                 <td><label for="id_is_active">Active:</label></td>
                 <td>{{ form.is_active }}</td>
             </tr>
+            
         </table>
-        <button type="submit" class="btn btn-primary">Update</button>
+        <button type="submit" class="btn btn-primary" id = "update">Update</button>
     </form>
 {% endblock %}

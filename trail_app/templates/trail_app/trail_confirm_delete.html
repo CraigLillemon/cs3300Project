@@ -1,13 +1,15 @@
 {% extends 'trail_app/base_template.html' %}
 
 {% block content %}
+{% if user.is_authenticated %}
     <h1>Are you sure you want to delete "{{trail.name}}"?</h1>
     <p> can't turn back </p>
     <form method = "post">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type ="submit" class = "btn btn-danger">Yes, Delete</button>
+        <button type ="submit" class = "btn btn-danger"  id = "delete">Yes, Delete</button>
         <a href = "{% url 'state-list' %}" >Cancel</a>
 
     </form>
+    {%endif%}
 {% endblock %}

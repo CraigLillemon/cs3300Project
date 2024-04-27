@@ -1,6 +1,6 @@
-from django.urls import path
+from django.urls import path, include
 from . import views
-
+from django.contrib.auth.decorators import login_required
 
 urlpatterns = [
 #path function defines a url pattern
@@ -12,8 +12,15 @@ path('', views.index, name='index'),
 path('', views.index, name='login'),
 path('state/', views.state_list, name = 'state-list'),
 path('state/<int:pk>', views.state_detail, name = 'state-detail'),
+
+path('state/user/<int:pk>', views.user_state_detail, name = 'user-state-detail'),
+
 path('state/trail_form/<int:pk>', views.createTrail, name = 'trail-form'),
-path('trail/<int:pk>/delete/', views.TrailDeleteView.as_view(), name='trail-delete'),
-path('trail/<int:pk>/UPDATE/', views.TrailUpdateView.as_view(), name='trail-update'),
+path('trail/<int:pk>/delete/', login_required(views.TrailDeleteView.as_view()), name='trail-delete'),
+path('trail/<int:pk>/UPDATE/', login_required(views.TrailUpdateView.as_view()), name='trail-update'),
 path('state/trail/<int:pk>', views.trail_detail, name = 'trail-detail'),
+path('accounts/', include('django.contrib.auth.urls')),
+path('accounts/register', views.register, name = 'register_page'),
+
+path('accounts/logout/', views.logout_view, name='logout'),
 ]

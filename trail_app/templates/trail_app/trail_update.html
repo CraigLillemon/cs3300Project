@@ -45,6 +45,7 @@
         }
     </style>
 </head>
+{% if user.is_authenticated %}
     <h1>Update Trail: {{ state.state }}</h1>
     <form action="" method="post" enctype="multipart/form-data" class="trail-form">
         {% csrf_token %}
@@ -86,6 +87,7 @@
                 <td>{{ form.is_active }}</td>
             </tr>
         </table>
-        <button type="submit" class="btn btn-primary">Update</button>
+        <button type="submit" class="btn btn-primary"  id = "update">Update</button>
     </form>
+{%endif%}
 {% endblock %}

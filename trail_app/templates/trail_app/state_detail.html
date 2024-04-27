@@ -4,11 +4,10 @@
 
 <h1 style="text-align: center;">Trails in {{ state.state }}</h1>
 <p></p>
-<h2 style="text-align: center;">Create New Trail</h2>
-<p style="text-align: center;"><a href="{% url 'trail-form' state.id %}" class="btn btn-primary">New</a></p>
 {% for trail, data in zipped_data %}
     {% if trail %}
         <!-- Your HTML code for displaying trail information -->
+        
         <div class="container pt-1 my-5 border">
             <p><img src="{{ trail.image.url }}" width="150">
             <strong>{{ trail.name }}</strong> 
@@ -21,9 +20,9 @@
             <img src="http://openweathermap.org/img/w/{{ data.icon }}.png"> Wind Speed: {{ data.speed }} mph</strong></p>
             {% endif %}
             
-            <a href="{% url 'trail-delete' trail.id %}" class="btn btn-danger">Delete</a>
-            <a href="{% url 'trail-update' trail.id %}" class="btn btn-warning">Update</a>
+       
         </div>
     {% endif %}
 {% endfor %}
+
 {% endblock %}

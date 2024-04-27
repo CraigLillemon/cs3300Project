@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'trail_app',
     'django_bootstrap5',
+
 ]
 AUTHENTICATION_BACKENDS = [
 'django.contrib.auth.backends.ModelBackend',
@@ -59,8 +60,9 @@ ROOT_URLCONF = 'django_project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
+        
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
@@ -135,3 +137,5 @@ os.path.join(BASE_DIR, 'static'),
 
 
 MEDIA_URL = '/images/'
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL ='/'

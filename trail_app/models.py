@@ -2,7 +2,15 @@ from django.db import models
 from django.urls import reverse, reverse_lazy
 from django.views import generic
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 
+
+class TrailFolders(models.Model):
+    title = models.CharField(max_length=200)
+    def __str__(self):
+        return self.title
+    def get_absolute_url(self):
+        return reverse('portfolio-detail', args=[str(self.id)])
 class State(models.Model):
     state_names = (
     ("Alabama", "Alabama"),
@@ -64,20 +72,6 @@ class State(models.Model):
         return self.state
     def get_absolute_url(self):
         return reverse('state-detail', args=[str(self.id)])
-    
-#class User(models.Model):
-#List of choices for major value in database, human readable name
-   
-    #email = models.CharField("UCCS Email", max_length=200, blank =  False)
-    #password = models.CharField("Password", max_length=200, blank = False)
-    #def __str__(self):
-    #    return self.name
-    #def get_absolute_url(self):
-    #    return reverse('user-detail', args=[str(self.id)])
-    #state = models.OneToOneField(State, null=True, on_delete=models.CASCADE, unique=True)
-    
-
-
 class Trail(models.Model):
     name = models.CharField(max_length=200, blank=False)
     state = models.ForeignKey(State, on_delete=models.CASCADE)
@@ -93,6 +87,29 @@ class Trail(models.Model):
         return self.name
     def get_absolute_url(self):
         return reverse('trail-detail', args=[str(self.id)])
+    
+
+class User(models.Model):
+    name = models.CharField(max_length=200)
+    trailFolder = models.OneToOneField(TrailFolders, on_delete=models.CASCADE)
+    manager = models.OneToOneField(User, null = True, on_delete= models.CASCADE)
+    def __str__(self):
+        return self.name
+    def get_absolute_url(self):
+        return reverse('portfolio-detail', args=[str(self.id)])
+#List of choices for major value in database, human readable name
+   
+    #email = models.CharField("UCCS Email", max_length=200, blank =  False)
+    #password = models.CharField("Password", max_length=200, blank = False)
+    #def __str__(self):
+    #    return self.name
+    #def get_absolute_url(self):
+    #    return reverse('user-detail', args=[str(self.id)])
+    #state = models.OneToOneField(State, null=True, on_delete=models.CASCADE, unique=True)
+    
+
+
+
 class StateListView(generic.ListView):
     model = State
 class StateDetailView(generic.DetailView):
@@ -102,6 +119,8 @@ class TrailListView(generic.ListView):
     model = Trail
 class TrailDetailView(generic.DetailView):
     model = Trail
+
+
 class TrailUpdateView(generic.UpdateView):
     model =Trail
     fields = ('name', 'state', 'location', 'zip_code', 'temperature', 'weather', 'description', 'image', 'is_active', )
